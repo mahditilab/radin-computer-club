@@ -1,9 +1,12 @@
 """Generates index.html (main page) and session-1..10.html. Run: python3 build.py"""
+import hashlib
 import json
 from html import escape
 from pathlib import Path
 
 OUT = Path(__file__).parent
+# Version stamp so browsers fetch new CSS/JS after every change (GitHub Pages caches 10 min).
+V = hashlib.md5((OUT / "app.js").read_bytes() + (OUT / "style.css").read_bytes()).hexdigest()[:8]
 fa = lambda n: str(n).translate(str.maketrans("0123456789", "۰۱۲۳۴۵۶۷۸۹"))
 FONT = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap">'
 
@@ -230,7 +233,7 @@ S = [
  ),
 ]
 
-HEAD = '<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>{t}</title>' + FONT + '<link rel="stylesheet" href="style.css"></head><body>'
+HEAD = '<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>{t}</title>' + FONT + '<link rel="stylesheet" href="style.css?v=' + V + '"></head><body>'
 
 
 def session_page(n, s):
@@ -256,7 +259,7 @@ def session_page(n, s):
 <div class="msg" id="bale">{escape(bale)}</div><div class="row" style="justify-content:flex-start"><button data-copy="bale">کپی پیام</button><span class="muted"></span></div></div>
 <div class="box"><h3>تمرین خانه</h3><p>{s['homework']}</p></div>
 <nav class="pager">{prev}{nxt}</nav>
-</main><script src="app.js"></script></body></html>"""
+</main><script src="app.js?v={V}"></script></body></html>"""
 
 
 def index_page():
