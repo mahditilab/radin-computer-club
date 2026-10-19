@@ -57,3 +57,20 @@ button:hover{background:var(--accent);color:var(--card)}
 .cert{border:3px double var(--sun);border-radius:12px;padding:28px 20px;text-align:center;display:grid;gap:8px;background:var(--bg)}
 .cert .big{color:var(--accent)}
 @media (prefers-reduced-motion:reduce){.star{transition:none}}
+/* Mouse lab */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:10px}
+.tile{height:64px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:#fff;font-size:1.6rem;padding:0;display:grid;place-items:center;user-select:none}
+.tile:hover{background:var(--bg);border-color:var(--accent)}
+.tile.on,.tile.on:hover{background:var(--good);border-color:var(--good)}
+.tile.sel{border-color:var(--accent);border-width:4px}
+.big-tile{width:120px;height:120px;font-size:3.5rem}
+.ctx{position:absolute;display:grid;background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:0 6px 20px rgb(0 0 0/.18);padding:4px;z-index:2}
+.ctx[hidden]{display:none}
+.ctx button{border:0;text-align:start;padding:6px 16px}
+.fruit{font-size:2.4rem;cursor:grab;user-select:none;padding:4px}
+.fruit.lift{opacity:.4}
+.basket{min-height:120px;border:3px dashed var(--line);border-radius:16px;display:grid;place-items:center;font-size:3rem;background:var(--bg)}
+.basket.over{border-color:var(--good)}
+.basket .in{display:flex;flex-wrap:wrap;gap:4px;font-size:1.6rem;min-height:1em}
+.lab-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.lab-grid .box{background:var(--bg)}
